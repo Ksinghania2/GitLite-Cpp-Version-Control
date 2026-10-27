@@ -1,34 +1,24 @@
-# Git-Lite: A Lightweight Version Control Engine in C++
+# GitLite: Minimal C++ Version-Control Demo
 
-Git-Lite is a minimal, command-line version control system built from scratch in modern C++. It mimics core Git behaviors by managing 
-internal file snapshots, tracking directory states, and maintaining a structured commit history log without relying on external third-party 
-libraries.
+GitLite is a small C++17 command-line project that demonstrates file snapshots and a plain-text commit log. It is an educational example, not a Git-compatible version-control system.
 
-This project was built to master operating system file manipulations, low-level binary streams, and modern C++ system design paradigms 
-required for high-performance software engineering roles.
+## Commands implemented
 
-## Key Features
-* Repository Initialization (`init`):** Programmatically sets up an isolated data structure (`.minigit/`) to store configurations, history 
-metadata logs, and atomic snapshots.
-* State Commits (`commit`):** Deep-copies active system files into immutable version snapshots, tracking human-readable descriptions 
-alongside absolute UNIX timestamps.
-* **History Traversal (`log`):** Sequentially reads and parses continuous binary/text tracking log streams to output real-time historical 
-timelines directly to the terminal.
+- `init` creates the `.minigit/` directory, snapshot directory, commit counter, and log file.
+- `commit "message"` copies regular files from the current directory into a numbered snapshot and appends the message and timestamp to the log.
+- `log` prints the recorded commit entries.
 
-##️ Technical Skills Demonstrated
-* Modern C++ Architecture:** Leverages `std::filesystem` (C++17) for robust, platform-independent directory iterations and path handling.
-* Resource Optimization:** Utilizes high-performance sequential File I/O input/output streams (`std::ifstream`, `std::ofstream`) ensuring 
-stable memory performance even when tracking substantial assets.
-* **Command-Line Interface Parsing:** Implements native execution argument processing (`argc`, `argv`) to handle responsive terminal 
-commands.
+## Build and run
 
-## How to Build & Run
-
-### 1. Compilation
-Use any C++ compiler supporting C++17 or higher:
 ```bash
 g++ -std=c++17 main.cpp -o minigit
+./minigit init
+./minigit commit "First snapshot"
+./minigit log
+```
 
+Run the commands from the directory you want to snapshot. The `.minigit/` directory itself is excluded from the copied files.
 
+## Scope and limitations
 
-
+This project snapshots only regular files directly inside the current directory; it does not recurse into subdirectories. It does not implement staging, diffs, restore, branches, merges, content-addressed objects, or Git compatibility. Treat it as a learning demo rather than a backup tool.
